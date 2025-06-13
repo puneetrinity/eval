@@ -3,10 +3,15 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react({
+      jsxRuntime: 'automatic'
+    })
+  ],
+  root: './client',
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      '@': path.resolve(__dirname, './client/src'),
     },
   },
   server: {
@@ -17,4 +22,14 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    outDir: './dist',
+    emptyOutDir: true,
+    rollupOptions: {
+      external: [],
+    },
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react/jsx-runtime']
+  }
 });
