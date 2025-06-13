@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+    "server:dev": "tsx watch server/index.ts",
+    "client:dev": "cd client && vite",
+    "build": "npm run client:build && npm run server:build",
+    "client:build": "cd client && vite build",
+    "server:build": "esbuild server/index.ts --bundle --platform=node --outfile=dist/server.js",
+    "start": "node dist/server.js",
+    "db:push": "drizzle-kit push:pg",
+    "db:studio": "drizzle-kit studio",
+    "check": "tsc --noEmit"
+  }
+}
